@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="DataStructuresVisualizer" default="run" basedir=".">
+    <description>
+        Ant build file for Data Structures Visualizer project
+    </description>
+
+    <!-- Define project properties -->
+    <property name="src.dir" location="src"/>
+    <property name="build.dir" location="build"/>
+    <property name="classes.dir" location="${build.dir}/classes"/>
+    <property name="main-class" value="Main"/>
+
+    <!-- Define classpath -->
+    <path id="classpath">
+        <pathelement location="${classes.dir}"/>
+    </path>
+
+    <!-- Clean build directory -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- Create build directory -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+    </target>
+
+    <!-- Compile Java code -->
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false">
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
+
+    <!-- Run the application -->
+    <target name="run" depends="compile">
+        <java classname="${main-class}" fork="true">
+            <classpath refid="classpath"/>
+        </java>
+    </target>
+</project>
